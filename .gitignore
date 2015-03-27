@@ -45,8 +45,8 @@ Session.vim
 /core/server/data/export/exported*
 /content/tmp/*
 /content/data/*
-#/content/apps/**/*
-#/content/themes/**/*
+/content/apps/**/*
+/content/themes/**/*
 /content/images/**/*
 !/content/themes/casper/**
 !/README.md

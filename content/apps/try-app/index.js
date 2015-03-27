@@ -19,8 +19,8 @@ MyApp = App.extend({
 		console.log('deactivate')
 	},
 	filters: {
-		ghost_head: 'handleGhostHead',
-		ghost_foot: [9, 'handleGhostFoot']
+//		ghost_head: 'handleGhostHead',
+//		ghost_foot: [9, 'handleGhostFoot']
 	},
 	handleGhostHead: function () {
 		console.log('handleGhostHead');
