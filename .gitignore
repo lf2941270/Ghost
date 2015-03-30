@@ -59,7 +59,7 @@ CHANGELOG.md
 
 config.js
 /core/client/config.js
-.gitconfig
+
 
 # Built asset files
 /core/built
