@@ -1,2 +1,2 @@
-var child = require('child_process');
-child.exec('npm install && grunt init');
+//var child = require('child_process');
+//child.exec('npm install && grunt init');
