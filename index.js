@@ -27,5 +27,3 @@ ghost().then(function (ghostServer) {
 }).catch(function (err) {
     errors.logErrorAndExit(err, err.context, err.help);
 });
-
-//测试
