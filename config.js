@@ -15,11 +15,11 @@ config = {
 	    database: {
 		    client: 'mysql',
 		    connection: {
-			    host: '127.0.0.1',
-			    port: 3306,
-			    user: 'root', //your ak
-			    password: '', //your sk
-			    database: 'ghost',//your dbname
+			    host: 'sqld.duapp.com',
+			    port: 4050,
+			    user: '90orlhXo4X2ZeemfKf5GT4Uk', //your ak
+			    password: 'IV2nT2hmTry3s4zONylf82xyYyUolYtW', //your sk
+			    database: 'YIhJVCnQObZfkIHaHkXK',//your dbname
 			    charset: 'utf8'
 		    },
 		    debug: false
