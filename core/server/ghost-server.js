@@ -96,7 +96,7 @@ GhostServer.prototype.logStartMessages = function () {
     }
     // ensure that Ghost exits correctly on Ctrl+C and SIGTERM
     process.
-        removeAllListeners('SIGINT').on('SIGINT', shutdown).
+//        removeAllListeners('SIGINT').on('SIGINT', shutdown).
         removeAllListeners('SIGTERM').on('SIGTERM', shutdown);
 };
 
