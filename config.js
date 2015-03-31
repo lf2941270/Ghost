@@ -33,6 +33,13 @@ config = {
 		    host: '127.0.0.1',
 		    // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
 		    port: '18080'
+	    },
+	    qiniu: {
+		    bucketname: 'afanweb', //七牛云的目录名
+		    ACCESS_KEY: '35bMF5rT5-q3PYhVvJ793vaTwq5d8BU2EShyLkGC', //七牛云的ak
+		    SECRET_KEY: '8A1haHkt71OY4VikO4X4zhtpx_N7gJkuTGnEW-KD', //七牛云的sk
+		    root: '/image/',
+		    prefix: 'http://7xid3l.com1.z0.glb.clouddn.com' //七牛的空间域名
 	    }
     },
 
