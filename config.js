@@ -22,7 +22,11 @@ config = {
 			    database: 'YIhJVCnQObZfkIHaHkXK',//your dbname
 			    charset: 'utf8'
 		    },
-		    debug: false
+		    debug: false,
+		    pool: {
+			    min: 0,
+			    max: 0
+		    }
 	    },
 	    server: {
 		    // Host to be passed to node's `net.Server#listen()`
