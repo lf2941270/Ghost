@@ -69,7 +69,6 @@
         "xml": "0.0.12"
     },
     "optionalDependencies": {
-        "mysql": "2.1.1",
         "pg": "4.1.1"
     },
     "devDependencies": {
