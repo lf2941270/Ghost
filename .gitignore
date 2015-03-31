@@ -12,7 +12,7 @@ logs
 results
 
 npm-debug.log
-!node_modules/mysql
+!node_modules/mysql/**/*
 node_modules
 bower_components
 .bowerrc
