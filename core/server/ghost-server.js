@@ -163,7 +163,7 @@ GhostServer.prototype.start = function (externalApp) {
         });
         self.httpServer.on('connection', self.connection.bind(self));
         self.httpServer.on('listening', function () {
-//            self.logStartMessages();
+
             clearTimeout(self.upgradeWarning);
             resolve(self);
         });
