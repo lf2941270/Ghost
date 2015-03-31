@@ -36,7 +36,7 @@ config = {
     development: {
         // The url to use when providing links to the site, E.g. in RSS and email.
         // Change this to your Ghost blogs published URL.
-        url: 'http://localhost:18080',
+        url: 'http://localhost:2368',
 
         // Example mail config
         // Visit http://support.ghost.org/mail for instructions
@@ -73,7 +73,7 @@ config = {
             // Host to be passed to node's `net.Server#listen()`
             host: '127.0.0.1',
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-            port: '18080'
+            port: '2368'
         },
         paths: {
             contentPath: path.join(__dirname, '/content/')
@@ -86,7 +86,7 @@ config = {
     // Used when developing Ghost to run tests and check the health of Ghost
     // Uses a different port number
     testing: {
-        url: 'http://127.0.0.1:18080',
+        url: 'http://127.0.0.1:2369',
         database: {
             client: 'sqlite3',
             connection: {
@@ -95,7 +95,7 @@ config = {
         },
         server: {
             host: '127.0.0.1',
-            port: '18080'
+            port: '2369'
         },
         logging: false
     },
@@ -103,7 +103,7 @@ config = {
     // ### Testing MySQL
     // Used by Travis - Automated testing run through GitHub
     'testing-mysql': {
-        url: 'http://127.0.0.1:18080',
+        url: 'http://127.0.0.1:2369',
         database: {
             client: 'mysql',
             connection: {
@@ -116,7 +116,7 @@ config = {
         },
         server: {
             host: '127.0.0.1',
-            port: '18080'
+            port: '2369'
         },
         logging: false
     },
@@ -124,7 +124,7 @@ config = {
     // ### Testing pg
     // Used by Travis - Automated testing run through GitHub
     'testing-pg': {
-        url: 'http://127.0.0.1:18080',
+        url: 'http://127.0.0.1:2369',
         database: {
             client: 'pg',
             connection: {
@@ -137,7 +137,7 @@ config = {
         },
         server: {
             host: '127.0.0.1',
-            port: '18080'
+            port: '2369'
         },
         logging: false
     }
