@@ -12,35 +12,35 @@ config = {
     production: {
         url: 'http://afanweb.duapp.com',
         mail: {},
-	    database: {
-		    client: 'mysql',
-		    connection: {
-			    host: 'sqld.duapp.com',
-			    port: 4050,
-			    user: '90orlhXo4X2ZeemfKf5GT4Uk', //your ak
-			    password: 'IV2nT2hmTry3s4zONylf82xyYyUolYtW', //your sk
-			    database: 'YIhJVCnQObZfkIHaHkXK',//your dbname
-			    charset: 'utf8'
-		    },
-		    debug: false,
-		    pool: {
-			    min: 0,
-			    max: 0
-		    }
-	    },
-	    server: {
-		    // Host to be passed to node's `net.Server#listen()`
-		    host: '127.0.0.1',
-		    // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-		    port: '18080'
-	    },
-	    qiniu: {
-		    bucketname: 'afanweb', //七牛云的目录名
-		    ACCESS_KEY: '35bMF5rT5-q3PYhVvJ793vaTwq5d8BU2EShyLkGC', //七牛云的ak
-		    SECRET_KEY: '8A1haHkt71OY4VikO4X4zhtpx_N7gJkuTGnEW-KD', //七牛云的sk
-		    root: '/image/',
-		    prefix: 'http://7xid3l.com1.z0.glb.clouddn.com' //七牛的空间域名
-	    }
+	    	database: {
+						client: 'mysql',
+						connection: {
+								host: 'sqld.duapp.com',
+								port: 4050,
+								user: '90orlhXo4X2ZeemfKf5GT4Uk', //your ak
+								password: 'IV2nT2hmTry3s4zONylf82xyYyUolYtW', //your sk
+								database: 'YIhJVCnQObZfkIHaHkXK',//your dbname
+								charset: 'utf8'
+						},
+						debug: false,
+						pool: {
+								min: 0,
+								max: 0
+						}
+	    	},
+				server: {
+						// Host to be passed to node's `net.Server#listen()`
+						host: '127.0.0.1',
+						// Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
+						port: '18080'
+				},
+				qiniu: {
+						bucketname: 'afanweb', //七牛云的目录名
+						ACCESS_KEY: '35bMF5rT5-q3PYhVvJ793vaTwq5d8BU2EShyLkGC', //七牛云的ak
+						SECRET_KEY: '8A1haHkt71OY4VikO4X4zhtpx_N7gJkuTGnEW-KD', //七牛云的sk
+						root: '/image/',
+						prefix: 'http://7xid3l.com1.z0.glb.clouddn.com' //七牛的空间域名
+					}
     },
 
     // ### Development **(default)**
@@ -88,7 +88,14 @@ config = {
         },
         paths: {
             contentPath: path.join(__dirname, '/content/')
-        }
+        },
+			qiniu: {
+				bucketname: 'afanweb', //七牛云的目录名
+				ACCESS_KEY: '35bMF5rT5-q3PYhVvJ793vaTwq5d8BU2EShyLkGC', //七牛云的ak
+				SECRET_KEY: '8A1haHkt71OY4VikO4X4zhtpx_N7gJkuTGnEW-KD', //七牛云的sk
+				root: '/image/',
+				prefix: 'http://7xid3l.com1.z0.glb.clouddn.com' //七牛的空间域名
+			}
     },
 
     // **Developers only need to edit below here**

@@ -39,10 +39,7 @@ upload = {
 
         return store.save(options.uploadimage).then(function (url) {
             return url;
-        }).finally(function () {
-            // Remove uploaded file from tmp location
-            return Promise.promisify(fs.unlink)(filepath);
-        });
+        })
     }
 };
 

@@ -7,19 +7,25 @@ var _       = require('lodash'),
 		nodefn  = require('when/node/function'),
 		path    = require('path'),
 		when    = require('when'),
+		Promise   = require('bluebird'),
 		config = require('../config'),
 		errors  = require('../errors'),
 		baseStore   = require('./base'),
 		crypto = require('crypto'),
+		util      = require('util'),
 		qiniu        = require('qiniu'),
 		qiniuConfig  = config.qiniu,
 		qiniuStore;
 qiniu.conf.ACCESS_KEY = qiniuConfig.ACCESS_KEY;
 qiniu.conf.SECRET_KEY = qiniuConfig.SECRET_KEY;
-qiniu.conf.USER_AGENT = 'Ghost 0.4.2';
+qiniu.conf.USER_AGENT = 'Ghost 0.5.10';
 var putPolicy = new qiniu.rs.PutPolicy(qiniuConfig.bucketname),
 		uptoken = putPolicy.token();
-qiniuStore = _.extend(baseStore, {
+
+function LocalFileStore() {
+}
+util.inherits(LocalFileStore, baseStore);
+_.extend(LocalFileStore.prototype, {
 	// ### Save
 	// Saves the image to storage (the file system)
 	// - image is the express image object
@@ -33,27 +39,29 @@ qiniuStore = _.extend(baseStore, {
 				key,
 				extra = new qiniu.io.PutExtra();
 		var savedpath = path.join(config.paths.imagesPath, image.name);
-		nodefn.call(fs.copy, image.path, savedpath).then(function(){
-			return nodefn.call(fs.readFile, savedpath);
-		}).then(function(data) {
-					md5 = md5sum.update(data).digest('hex');
-					targetFilename = path.join(targetDirRoot, md5.replace(/^(\w{1})(\w{2})(\w+)$/, '$1/$2/$3')) + ext;
-					targetFilename = targetFilename.replace(/\\/g, '/');
-					key = targetFilename.replace(/^\//, '');
-					return nodefn.call(qiniu.io.put, uptoken, key, data, extra);
-				}).then(function () {
-					return nodefn.call(fs.unlink, savedpath).then(function(){
-						return nodefn.call(fs.unlink, image.path);
-					}).otherwise(errors.logError);
-				}).then(function () {
-					// prefix + targetFilename
-					var fullUrl = qiniuConfig.prefix + targetFilename;
-					return saved.resolve(fullUrl);
-				}).otherwise(function (e) {
-					errors.logError(e);
-					return saved.reject(e);
-				});
-		return saved.promise;
+		return new Promise(function(resolve, reject){
+			nodefn.call(fs.copy, image.path, savedpath).then(function(){
+				return nodefn.call(fs.readFile, savedpath);
+			}).then(function(data) {
+						md5 = md5sum.update(data).digest('hex');
+						targetFilename = path.join(targetDirRoot, md5.replace(/^(\w{1})(\w{2})(\w+)$/, '$1/$2/$3')) + ext;
+						targetFilename = targetFilename.replace(/\\/g, '/');
+						key = targetFilename.replace(/^\//, '');
+						return nodefn.call(qiniu.io.put, uptoken, key, data, extra);
+					}).then(function () {
+						return nodefn.call(fs.unlink, savedpath).then(function(){
+							return nodefn.call(fs.unlink, image.path);
+						}).otherwise(errors.logError);
+					}).then(function () {
+						// prefix + targetFilename
+						var fullUrl = qiniuConfig.prefix + targetFilename;
+						return resolve(fullUrl);
+					}).otherwise(function (e) {
+						errors.logError(e);
+						return reject(e);
+					});
+		})
+
 	},
 	'exists': function (filename) {
 		// fs.exists does not play nicely with nodefn because the callback doesn't have an error argument
@@ -71,5 +79,4 @@ qiniuStore = _.extend(baseStore, {
 		return express['static'](config.paths.imagesPath, {maxAge: ONE_YEAR_MS});
 	}
 });
-
-module.exports = qiniuStore;
+module.exports = LocalFileStore;
