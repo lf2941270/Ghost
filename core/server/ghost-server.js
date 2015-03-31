@@ -96,7 +96,7 @@ GhostServer.prototype.logStartMessages = function () {
     }
     // ensure that Ghost exits correctly on Ctrl+C and SIGTERM
     process.
-//        removeAllListeners('SIGINT').on('SIGINT', shutdown).
+        removeAllListeners('SIGINT').on('SIGINT', shutdown).
         removeAllListeners('SIGTERM').on('SIGTERM', shutdown);
 };
 
@@ -163,7 +163,7 @@ GhostServer.prototype.start = function (externalApp) {
         });
         self.httpServer.on('connection', self.connection.bind(self));
         self.httpServer.on('listening', function () {
-
+//            self.logStartMessages();
             clearTimeout(self.upgradeWarning);
             resolve(self);
         });
