@@ -237,6 +237,9 @@ setupMiddleware = function (blogAppInstance, adminApp) {
     blogApp.use(serveSharedFile('favicon.ico', 'image/x-icon', utils.ONE_DAY_S));
     blogApp.use(serveSharedFile('sitemap.xsl', 'text/xsl', utils.ONE_DAY_S));
 
+
+    blogApp.use(serveSharedFile('baidu_webmaster_verify_eb39c303d73052f8eff29cd0fcaba0f3.html', 'text/html', utils.ONE_DAY_S));
+
     // Static assets
     blogApp.use('/shared', express['static'](path.join(corePath, '/shared'), {maxAge: utils.ONE_HOUR_MS}));
     blogApp.use('/content/images', storage.getStorage().serve());
