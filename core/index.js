@@ -4,7 +4,7 @@
 
 var server = require('./server');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = (SERVER_SORTWARE  && SERVER_SORTWARE === 'bae/3.0') ? 'product' : 'development';
 
 function makeGhost(options) {
     options = options || {};
