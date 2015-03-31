@@ -161,7 +161,7 @@ GhostServer.prototype.start = function (externalApp) {
                     'Please use the error code above to search for a solution.'
                 );
             }
-//            process.exit(-1);
+            process.exit(-1);
         });
         self.httpServer.on('connection', self.connection.bind(self));
         self.httpServer.on('listening', function () {
