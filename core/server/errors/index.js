@@ -150,7 +150,7 @@ errors = {
     logErrorAndExit: function (err, context, help) {
         this.logError(err, context, help);
         // Exit with 0 to prevent npm errors as we have our own
-//        process.exit(0);
+        process.exit(0);
     },
 
     logAndThrowError: function (err, context, help) {
