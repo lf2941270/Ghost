@@ -46,7 +46,7 @@ Session.vim
 /content/tmp/*
 /content/data/*
 /content/apps/**/*
-/content/themes/**/*
+# /content/themes/**/*
 /content/images/**/*
 !/content/themes/casper/**
 !/README.md
@@ -61,8 +61,8 @@ config.js
 /core/client/config.js
 
 # Built asset files
-/core/built
-/core/server/views/default.hbs
+# /core/built
+# /core/server/views/default.hbs
 
 # Coverage reports
 coverage.html
