@@ -578,7 +578,7 @@ frontendControllers = {
             });
         }).catch(handleError(next));
     },
-		check: function(req, res, next){
+		baecheck: function(req, res, next){
 				res.send('success!');
 		}
 };
