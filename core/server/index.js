@@ -89,6 +89,8 @@ function builtFilesExist() {
                 if (exists) {
                     resolve(true);
                 } else {
+									console.log('来自/home/bae/app/core/server/index.js:92:27')
+									console.log('Error: Javascript files have not been built. at /home/bae/app/core/server/index.js:92:27at Object.oncomplete (fs.js:107:15) ')
                     err = new Error(errorMessage);
 
                     err.help = errorHelp;
