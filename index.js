@@ -6,7 +6,7 @@ var express,
     ghost,
     parentApp,
     errors;
-
+console.log('Ghost start at' + new Date())
 // Make sure dependencies are installed and file system permissions are correct.
 require('./core/server/utils/startup-check').check();
 
