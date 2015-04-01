@@ -758,6 +758,9 @@ body.nav-opened .nav {
   content: ' ';
   background-color: rgba(0,0,0,0.7);
 }
+.no-cover.main-header:before{
+  background-color: #fff;
+}
 
 
 /* Hide when there's no cover image or on page2+ */
