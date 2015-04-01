@@ -218,7 +218,10 @@ function init(options) {
         });
 
         return new GhostServer(blogApp);
-    });
+    }).catch(function(err){
+					console.log('err log by /core/server/index.js:');
+					console.log(err);
+				});
 }
 
 module.exports = init;

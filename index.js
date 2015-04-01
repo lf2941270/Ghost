@@ -26,5 +26,7 @@ ghost().then(function (ghostServer) {
     ghostServer.start(parentApp);
 }).catch(function (err) {
 //    errors.logErrorAndExit(err, err.context, err.help);
+			console.log('err log by /index.js:');
+			console.log(err);
 			return console.error(err);
 });
