@@ -12,9 +12,9 @@ logs
 results
 
 npm-debug.log
-node_modules
+node_modules/**/*
 !node_modules/.gitignore
-!/node_modules/mysql
+!/node_modules/mysql/**/*
 bower_components
 .bowerrc
 .idea/*
