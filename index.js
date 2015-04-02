@@ -6,7 +6,7 @@ var express,
     ghost,
     parentApp,
     errors;
-console.log('Ghost start at' + new Date())
+
 // Make sure dependencies are installed and file system permissions are correct.
 require('./core/server/utils/startup-check').check();
 
@@ -25,8 +25,5 @@ ghost().then(function (ghostServer) {
     // Let ghost handle starting our server instance.
     ghostServer.start(parentApp);
 }).catch(function (err) {
-//    errors.logErrorAndExit(err, err.context, err.help);
-			console.log('err log by /index.js:');
-			console.log(err);
-			return console.error(err);
+    errors.logErrorAndExit(err, err.context, err.help);
 });
