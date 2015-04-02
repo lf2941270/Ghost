@@ -40,7 +40,8 @@ config = {
 						SECRET_KEY: '8A1haHkt71OY4VikO4X4zhtpx_N7gJkuTGnEW-KD', //七牛云的sk
 						root: '/image/',
 						prefix: 'http://7xid3l.com1.z0.glb.clouddn.com' //七牛的空间域名
-					}
+					},
+	        logging: false
     },
 
     // ### Development **(default)**
