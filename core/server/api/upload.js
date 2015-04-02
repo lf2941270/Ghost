@@ -41,7 +41,7 @@ upload = {
             return url;
         }).finally(function () {
 			        // Remove uploaded file from tmp location
-			        return Promise.promisify(fs.unlink)(filepath);
+//			        return Promise.promisify(fs.unlink)(filepath);
 		        });
     }
 };
