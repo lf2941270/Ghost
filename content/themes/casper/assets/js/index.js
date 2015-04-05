@@ -64,7 +64,7 @@
         var opts = $.extend(defaults, options);
         function showPic(src){
             $('#imageModal').modal('show').find('img').bind('load',function () {
-                var naturalWidth = $(this)[0].naturalWidth + 30;
+                var naturalWidth = $(this)[0].naturalWidth + 32;
                 var maxWidth = $(window).width() - 40;
                 naturalWidth = naturalWidth > maxWidth ? maxWidth : naturalWidth;
                 $('#imageModal').find('.modal-dialog').width(naturalWidth);
