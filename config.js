@@ -77,7 +77,8 @@ config = {
 			     connection: {
 //				     filename: path.join(__dirname, '/content/data/ghost-dev.db')
 				      database: "ghost",
-				      user: 'root'
+				      user: 'root',
+               password: '19890826'
 			     },
 			     debug: false
 		    },
