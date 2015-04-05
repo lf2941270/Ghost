@@ -15,6 +15,8 @@
 
         $(".scroll-down").arctic_scroll();
 
+        $('.post-content img').showBigPic();
+
         $(".menu-button, .nav-cover, .nav-close").on("click", function(e){
             e.preventDefault();
             $("body").toggleClass("nav-opened nav-closed");
@@ -53,4 +55,22 @@
         });
 
     };
+
+    //鼠标点击显示大图片
+    $.fn.showBigPic = function (options) {
+        var defaults = {
+            elem: $(this)
+        };
+        var opts = $.extend(defaults, options);
+
+        opts.elem.hover(function(){
+
+        });
+        opts.elem.click(function() {
+            var $this = $(this);
+            var src = $this.attr('src');
+            alert(src);
+        });
+
+    }
 })(jQuery);
