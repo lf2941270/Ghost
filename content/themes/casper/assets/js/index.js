@@ -15,6 +15,8 @@
 
         $(".scroll-down").arctic_scroll();
 
+        $('.post-content img').showBigPic();
+
         $(".menu-button, .nav-cover, .nav-close").on("click", function(e){
             e.preventDefault();
             $("body").toggleClass("nav-opened nav-closed");
@@ -53,4 +55,31 @@
         });
 
     };
+
+    //鼠标点击显示大图片
+    $.fn.showBigPic = function (options) {
+        var defaults = {
+            elem: $(this),
+        };
+        var opts = $.extend(defaults, options);
+        function showPic(src){
+            $('#imageModal').modal('show').find('img').bind('load',function () {
+                var naturalWidth = $(this)[0].naturalWidth + 32;
+                var maxWidth = $(window).width() - 40;
+                naturalWidth = naturalWidth > maxWidth ? maxWidth : naturalWidth;
+                $('#imageModal').find('.modal-dialog').width(naturalWidth);
+                $(this).show().siblings('.loading').hide();
+            }).attr('src', src);
+        }
+        opts.elem.hover(function(){
+
+        });
+        opts.elem.click(function() {
+            var $this = $(this);
+            var src = $this.attr('src');
+            showPic(src);
+        });
+
+
+    }
 })(jQuery);
