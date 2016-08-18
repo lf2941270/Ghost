@@ -2,14 +2,17 @@
 // API for DB operations
 var _                = require('lodash'),
     Promise          = require('bluebird'),
-    dataExport       = require('../data/export'),
+    exporter         = require('../data/export'),
     importer         = require('../data/importer'),
+    backupDatabase   = require('../data/migration').backupDatabase,
     models           = require('../models'),
     errors           = require('../errors'),
-    canThis          = require('../permissions').canThis,
     utils            = require('./utils'),
+    pipeline         = require('../utils/pipeline'),
+    i18n             = require('../i18n'),
 
     api              = {},
+    docName      = 'db',
     db;
 
 api.settings         = require('./settings');
@@ -29,18 +32,25 @@ db = {
      * @returns {Promise} Ghost Export JSON format
      */
     exportContent: function (options) {
+        var tasks = [];
+
         options = options || {};
 
         // Export data, otherwise send error 500
-        return canThis(options.context).exportContent.db().then(function () {
-            return dataExport().then(function (exportedData) {
+        function exportContent() {
+            return exporter.doExport().then(function (exportedData) {
                 return {db: [exportedData]};
             }).catch(function (error) {
                 return Promise.reject(new errors.InternalServerError(error.message || error));
             });
-        }, function () {
-            return Promise.reject(new errors.NoPermissionError('You do not have permission to export data (no rights).'));
-        });
+        }
+
+        tasks = [
+            utils.handlePermissions(docName, 'exportContent'),
+            exportContent
+        ];
+
+        return pipeline(tasks, options);
     },
     /**
      * ### Import Content
@@ -51,31 +61,47 @@ db = {
      * @returns {Promise} Success
      */
     importContent: function (options) {
+        var tasks = [];
+
         options = options || {};
 
-        // Check if a file was provided
-        if (!utils.checkFileExists(options, 'importfile')) {
-            return Promise.reject(new errors.NoPermissionError('Please select a file to import.'));
+        function validate(options) {
+            options.name = options.originalname;
+            options.type = options.mimetype;
+
+            // Check if a file was provided
+            if (!utils.checkFileExists(options)) {
+                return Promise.reject(new errors.ValidationError(i18n.t('errors.api.db.selectFileToImport')));
+            }
+
+            // Check if the file is valid
+            if (!utils.checkFileIsValid(options, importer.getTypes(), importer.getExtensions())) {
+                return Promise.reject(new errors.UnsupportedMediaTypeError(
+                    i18n.t('errors.api.db.unsupportedFile') +
+                        _.reduce(importer.getExtensions(), function (memo, ext) {
+                            return memo ? memo + ', ' + ext : ext;
+                        })
+                ));
+            }
+
+            return options;
         }
 
-        // Check if the file is valid
-        if (!utils.checkFileIsValid(options.importfile, importer.getTypes(), importer.getExtensions())) {
-            return Promise.reject(new errors.UnsupportedMediaTypeError(
-                'Unsupported file. Please try any of the following formats: ' +
-                    _.reduce(importer.getExtensions(), function (memo, ext) {
-                        return memo ? memo + ', ' + ext : ext;
-                    })
-            ));
-        }
-
-        // Permissions check
-        return canThis(options.context).importContent.db().then(function () {
-            return importer.importFromFile(options.importfile)
-                .then(api.settings.updateSettingsCache)
+        function importContent(options) {
+            return importer.importFromFile(options)
+                .then(function () {
+                    api.settings.updateSettingsCache();
+                })
                 .return({db: []});
-        }, function () {
-            return Promise.reject(new errors.NoPermissionError('You do not have permission to import data (no rights).'));
-        });
+        }
+
+        tasks = [
+            validate,
+            utils.handlePermissions(docName, 'importContent'),
+            importContent
+        ];
+
+        return pipeline(tasks, options);
     },
     /**
      * ### Delete All Content
@@ -86,17 +112,32 @@ db = {
      * @returns {Promise} Success
      */
     deleteAllContent: function (options) {
+        var tasks,
+            queryOpts = {columns: 'id', context: {internal: true}};
+
         options = options || {};
 
-        return canThis(options.context).deleteAllContent.db().then(function () {
-            return Promise.resolve(models.deleteAllContent())
-                .return({db: []})
-                .catch(function (error) {
-                    return Promise.reject(new errors.InternalServerError(error.message || error));
-                });
-        }, function () {
-            return Promise.reject(new errors.NoPermissionError('You do not have permission to export data (no rights).'));
-        });
+        function deleteContent() {
+            var collections = [
+                models.Post.findAll(queryOpts),
+                models.Tag.findAll(queryOpts)
+            ];
+
+            return Promise.each(collections, function then(Collection) {
+                return Collection.invokeThen('destroy');
+            }).return({db: []})
+            .catch(function (error) {
+                throw new errors.InternalServerError(error.message || error);
+            });
+        }
+
+        tasks = [
+            utils.handlePermissions(docName, 'deleteAllContent'),
+            backupDatabase,
+            deleteContent
+        ];
+
+        return pipeline(tasks, options);
     }
 };
 
