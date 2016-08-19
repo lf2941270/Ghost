@@ -22,9 +22,8 @@ RUN buildDeps=' \
 	' \
 	&& set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-	&& cp ./  ${GHOST_SOURCE}\
+	&& cp ./  $GHOST_SOURCE\
 	&& npm install --production \
-	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
 	&& npm cache clean \
 	&& rm -rf /tmp/npm*
 
