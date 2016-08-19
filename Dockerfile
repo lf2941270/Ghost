@@ -20,7 +20,6 @@ RUN buildDeps=' \
 		python \
 		unzip \
 	'
-RUN set -x
 RUN apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/*
 RUN cp ./package.json  ${GHOST_SOURCE}/
 RUN npm install --production
