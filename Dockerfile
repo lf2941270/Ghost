@@ -29,9 +29,9 @@ RUN apt-get update && apt-get install -y $buildDeps --no-install-recommends && r
 RUN pwd
 RUN ls
 RUN cd /usr/src/ghost && ls
-RUN cp ./package.json  ${GHOST_SOURCE}/
+COPY ./package.json  ${GHOST_SOURCE}/
 RUN npm install --production
-RUN cp . ${GHOST_SOURCE}/
+COPY . ${GHOST_SOURCE}/
 RUN npm cache clean
 RUN rm -rf /tmp/npm*
 
