@@ -6,14 +6,14 @@
 var path = require('path'),
     config;
 
-var config = {
-    host: process.env.MYSQL_PORT_3306TCP_ADDR,
+var option = {
+    host: process.env.MYSQL_PORT_3306_TCP_ADDR,
     user: process.env.MYSQL_USERNAME,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_INSTANCE_NAME,
     charset: 'utf8',
 }
-console.log(config)
+console.log(option)
 config = {
     // ### Production
     // When running Ghost in the wild, use the production environment.
@@ -24,7 +24,7 @@ config = {
         database: {
             client: 'mysql',
             connection: {
-                host: process.env.MYSQL_PORT_3306TCP_ADDR,
+                host: process.env.MYSQL_PORT_3306_TCP_ADDR,
                 user: process.env.MYSQL_USERNAME,
                 password: process.env.MYSQL_PASSWORD,
                 database: process.env.MYSQL_INSTANCE_NAME,
