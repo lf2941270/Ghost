@@ -19,6 +19,7 @@
     "main": "./core/index",
     "scripts": {
         "preinstall": "node core/server/utils/npm/preinstall.js",
+        "fake": "NODE_ENV=production MYSQL_PORT=tcp://10.10.26.58:3306 MYSQL_PORT_3306_TCP_ADDR=10.10.26.58 MYSQL_PORT_3306_TCP=tcp://10.10.26.58:3306 MYSQL_PORT_3306_TCP_PROTO=tcp MYSQL_PORT_3306_TCP_PORT=3306 MYSQL_CONNECTION=uJIiwyOm0RUlnYpr:p6y852qgWrRBDUkJm@10.10.26.58:3306/wphLsGjJ6WnrYAf0 MYSQL_INSTANCE_NAME=wphLsGjJ6WnrYAf0 MYSQL_PASSWORD=p6y852qgWrRBDUkJm MYSQL_USERNAME=uJIiwyOm0RUlnYpr node index",
         "start": "node index",
         "test": "grunt validate --verbose"
     },
@@ -26,6 +27,7 @@
         "node": "~0.10.0 || ~0.12.0 || ^4.2.0"
     },
     "dependencies": {
+        "sqlite3": "3.1.4",
         "bcryptjs": "2.3.0",
         "bluebird": "3.4.1",
         "body-parser": "1.15.2",
@@ -65,12 +67,12 @@
         "rss": "1.2.1",
         "semver": "5.3.0",
         "showdown-ghost": "0.3.6",
-        "sqlite3": "3.1.4",
         "superagent": "2.2.0",
         "unidecode": "0.1.8",
         "validator": "5.5.0",
         "xml": "1.0.1",
-        "mysql": "2.1.1"
+        "mysql": "2.1.1",
+        "when": "3.7.7"
     },
     "optionalDependencies": {
         "mysql": "2.1.1",

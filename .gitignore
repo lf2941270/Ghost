@@ -43,6 +43,7 @@ Session.vim
 .build
 .dist
 .tmp
+.env
 
 /core/server/data/export/exported*
 /content/tmp/*
