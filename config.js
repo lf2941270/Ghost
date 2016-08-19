@@ -6,6 +6,14 @@
 var path = require('path'),
     config;
 
+var config = {
+    host: process.env.MYSQL_PORT_3306TCP_ADDR,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_INSTANCE_NAME,
+    charset: 'utf8',
+}
+console.log(config)
 config = {
     // ### Production
     // When running Ghost in the wild, use the production environment.
@@ -26,7 +34,7 @@ config = {
         },
 
         server: {
-            host: '127.0.0.1',
+            host: '0.0.0.0',
             port: '2368'
         }
     },
