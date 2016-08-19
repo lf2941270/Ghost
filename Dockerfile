@@ -1,7 +1,7 @@
 # http://support.ghost.org/supported-node-versions/
 # https://github.com/nodejs/LTS
 FROM node:4-slim
-
+RUN pwd
 RUN groupadd user && useradd --create-home --home-dir /home/user -g user user
 
 RUN apt-get update && apt-get install -y \
@@ -21,6 +21,7 @@ RUN buildDeps=' \
 		unzip \
 	'
 RUN apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN pwd
 RUN cp ./package.json  ${GHOST_SOURCE}/
 RUN npm install --production
 RUN cp . ${GHOST_SOURCE}/
