@@ -29,8 +29,6 @@ RUN rm -rf /tmp/npm*
 
 
 
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 2368
 CMD ["npm", "start"]
