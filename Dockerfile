@@ -19,14 +19,14 @@ RUN buildDeps=' \
 		make \
 		python \
 		unzip \
-	' \
-	&& set -x \
-	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-	&& cp ./package.json  ${GHOST_SOURCE}/\
-	&& npm install --production \
-	&& cp . ${GHOST_SOURCE}/\
-	&& npm cache clean \
-	&& rm -rf /tmp/npm*
+	'
+RUN set -x
+RUN apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN cp ./package.json  ${GHOST_SOURCE}/
+RUN npm install --production
+RUN cp . ${GHOST_SOURCE}/
+RUN npm cache clean
+RUN rm -rf /tmp/npm*
 
 
 COPY docker-entrypoint.sh /entrypoint.sh
