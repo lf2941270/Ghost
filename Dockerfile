@@ -3,15 +3,17 @@
 FROM node:4-slim
 RUN pwd
 RUN groupadd user && useradd --create-home --home-dir /home/user -g user user
+RUN pwd
 
 RUN apt-get update && apt-get install -y \
 		ca-certificates \
 		wget \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
+RUN pwd
 
 ENV GHOST_SOURCE /usr/src/ghost
-WORKDIR $GHOST_SOURCE
+RUN pwd
 
 
 RUN buildDeps=' \
@@ -20,6 +22,8 @@ RUN buildDeps=' \
 		python \
 		unzip \
 	'
+RUN pwd
+
 RUN apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/*
 RUN pwd
 RUN cp ./package.json  ${GHOST_SOURCE}/
@@ -27,6 +31,8 @@ RUN npm install --production
 RUN cp . ${GHOST_SOURCE}/
 RUN npm cache clean
 RUN rm -rf /tmp/npm*
+
+WORKDIR $GHOST_SOURCE
 
 
 COPY docker-entrypoint.sh /entrypoint.sh
