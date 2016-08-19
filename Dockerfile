@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 ENV GHOST_SOURCE /usr/src/ghost
+WORKDIR $GHOST_SOURCE
 
 RUN buildDeps=' \
 		gcc \
@@ -26,7 +27,6 @@ COPY . ${GHOST_SOURCE}/
 RUN npm cache clean
 RUN rm -rf /tmp/npm*
 
-WORKDIR $GHOST_SOURCE
 
 
 COPY docker-entrypoint.sh /entrypoint.sh
