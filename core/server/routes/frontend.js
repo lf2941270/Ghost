@@ -40,9 +40,6 @@ frontendRoutes = function frontendRoutes() {
         }
     });
 
-		//baecheck
-		router.get('/baecheck',  frontend.baecheck);
-
     // Default
     router.get('*', frontend.single);
 

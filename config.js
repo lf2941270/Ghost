@@ -6,14 +6,6 @@
 var path = require('path'),
     config;
 
-var option = {
-    host: process.env.MYSQL_PORT_3306_TCP_ADDR,
-    user: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_INSTANCE_NAME,
-    charset: 'utf8',
-}
-console.log(option)
 config = {
     // ### Production
     // When running Ghost in the wild, use the production environment.
@@ -24,11 +16,12 @@ config = {
         database: {
             client: 'mysql',
             connection: {
-                host: process.env.MYSQL_PORT_3306_TCP_ADDR,
-                user: process.env.MYSQL_USERNAME,
-                password: process.env.MYSQL_PASSWORD,
-                database: process.env.MYSQL_INSTANCE_NAME,
-                charset: 'utf8',
+                host     : process.env.MYSQL_PORT_3306_TCP_ADDR,
+                port     : process.env.MYSQL_PORT_3306_TCP_PORT,
+                user     : process.env.MYSQL_USERNAME,
+                password : process.env.MYSQL_PASSWORD,
+                database : process.env.MYSQL_INSTANCE_NAME,
+                charset  : 'utf8'
             },
             debug: false
         },
@@ -36,7 +29,14 @@ config = {
         server: {
             host: '0.0.0.0',
             port: '2368'
-        }
+        },
+        qiniu: {
+            bucketname: 'afanweb', //七牛云的目录名
+            ACCESS_KEY: '35bMF5rT5-q3PYhVvJ793vaTwq5d8BU2EShyLkGC', //七牛云的ak
+            SECRET_KEY: '8A1haHkt71OY4VikO4X4zhtpx_N7gJkuTGnEW-KD', //七牛云的sk
+            root: '/image/',
+            prefix: 'http://7xid3l.com1.z0.glb.clouddn.com' //七牛的空间域名
+        },
     },
 
     // ### Development **(default)**
@@ -68,9 +68,13 @@ config = {
         // #### Database
         // Ghost supports sqlite3 (default), MySQL & PostgreSQL
         database: {
-            client: 'sqlite3',
+            client: 'mysql',
             connection: {
-                filename: path.join(__dirname, '/content/data/ghost-dev.db')
+                host     : '127.0.0.1',
+                port     : '3306',
+                user     : 'root',
+                database : 'ghostblog',
+                charset  : 'utf8'
             },
             debug: false
         },
@@ -86,6 +90,13 @@ config = {
         // Specify where your content directory lives
         paths: {
             contentPath: path.join(__dirname, '/content/')
+        },
+        qiniu: {
+            bucketname: 'afanweb', //七牛云的目录名
+            ACCESS_KEY: '35bMF5rT5-q3PYhVvJ793vaTwq5d8BU2EShyLkGC', //七牛云的ak
+            SECRET_KEY: '8A1haHkt71OY4VikO4X4zhtpx_N7gJkuTGnEW-KD', //七牛云的sk
+            root: '/image/',
+            prefix: 'http://7xid3l.com1.z0.glb.clouddn.com' //七牛的空间域名
         }
     },
 

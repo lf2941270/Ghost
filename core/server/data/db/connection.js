@@ -49,7 +49,6 @@ function configure(dbConfig) {
 
     return dbConfig;
 }
-
 if (!knexInstance && config.database && config.database.client) {
     knexInstance = knex(configure(config.database));
 }
