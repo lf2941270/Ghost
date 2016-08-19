@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 RUN pwd
-
+RUN ls
 ENV GHOST_SOURCE /usr/src/ghost
 RUN pwd
-
+RUN ls
 
 RUN buildDeps=' \
 		gcc \
@@ -23,9 +23,12 @@ RUN buildDeps=' \
 		unzip \
 	'
 RUN pwd
+RUN ls
 
 RUN apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/*
 RUN pwd
+RUN ls
+RUN cd /usr/src/ghost && ls
 RUN cp ./package.json  ${GHOST_SOURCE}/
 RUN npm install --production
 RUN cp . ${GHOST_SOURCE}/
