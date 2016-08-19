@@ -70,7 +70,7 @@
         "unidecode": "0.1.8",
         "validator": "5.5.0",
         "xml": "1.0.1",
-        "mysql": "2.1.1",
+        "mysql": "2.1.1"
     },
     "optionalDependencies": {
         "mysql": "2.1.1",
